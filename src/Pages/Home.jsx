@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react'
 import dbService from "../appwrite/config";
 import { Container, PostCard } from '../components'
 import logo from "../assets/pic-w4y.jpg"
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 
 function Home() {
     const [posts, setPosts] = useState([])
-    const authStatus = useSelector((state) => state.auth.status)
+    // const authStatus = useSelector((state) => state.auth.status)
 
-    const navItems = {
-            name: "Login",
-            slug: "/login",
-            active: !authStatus,
-        }
+    // const navItems = {
+    //         name: "Login",
+    //         slug: "/login",
+    //         active: !authStatus,
+    //     }
 
     useEffect(() => {
         dbService.getAllPost().then((posts) => {
@@ -31,13 +32,18 @@ function Home() {
 
                         <div className="p-2 mt-4 w-full">
                             <h1 className="text-2xl font-bold text-white">
-                                <a href={navItems.active?(navItems.slug) : null} className='hover:text-[#ee0404]'>Login to read posts
+                                {/* <a href={navItems.active?(navItems.slug) : null} className='hover:text-[#ee0404]'> */}
+                                    <Link
+                                    to="/login"
+                                    className='hover:text-[#ee0404]'>
+                                        Login to read posts
                                     <button type="button" class="text-white bg-blue-700  hover:bg-[rgb(238,4,4)] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center ml-2 ">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                                         </svg>
                                         <span class="sr-only">Icon description</span>
-                                    </button>  </a>
+                                    </button> 
+                                    </Link>  
                             </h1>
                         </div>
                     </div>
